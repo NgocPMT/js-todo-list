@@ -17,7 +17,15 @@ const todoController = (function () {
     return sortedTodos;
   };
 
-  return { createTodo, getTodos };
+  const deleteTodo = (UID) => {
+    const deletingTodo = todos.find((todo) => (todo.UID = UID));
+
+    if (deletingTodo) {
+      todos.splice(todos.indexOf(deletingTodo), 1);
+    }
+  };
+
+  return { createTodo, getTodos, deleteTodo };
 })();
 
 export default todoController;
