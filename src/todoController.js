@@ -12,7 +12,7 @@ const todoController = (function () {
   const getTodos = () => {
     const sortedTodos = [...todos];
 
-    sortedTodos.sort((t1, t2) => t1.priority - t2.priority);
+    sortedTodos.sort((t1, t2) => t1.getPriority() - t2.getPriority());
 
     return sortedTodos;
   };

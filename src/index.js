@@ -1,4 +1,30 @@
 import "./css/style.css";
-import projectController from "./projectController";
+import todoController from "./todoController";
+import displayController from "./displayController";
 
-projectController.createProject("default");
+todoController.createTodo("Buy groceries", "2025-05-01", 2, "default", false);
+todoController.createTodo(
+  "Finish project report",
+  "2025-05-03",
+  1,
+  "default",
+  false
+);
+todoController.createTodo("Call plumber", "2025-04-30", 3, "default", true);
+todoController.createTodo(
+  "Book flight tickets",
+  "2025-05-05",
+  2,
+  "default",
+  false
+);
+todoController.createTodo(
+  "Submit tax documents",
+  "2025-04-29",
+  1,
+  "default",
+  true
+);
+
+console.log(todoController.getTodos());
+displayController.renderTodos();

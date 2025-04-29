@@ -14,11 +14,11 @@ const displayController = (function () {
 
     const content = projects
       .map((project) => {
-        const projectTodos = project
+        const projectTodos = project.todos
           .map(
             (todo) => `
           <div class="todo">
-            <p class="todo-title">${todo.title}</p>
+            <p class="todo-title">${todo.getTitle()}</p>
           </div>
         `
           )
