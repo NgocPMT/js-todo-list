@@ -1,3 +1,3 @@
-export default function generateProject(name) {
-  return { name, todos: [] };
+export default function generateProject(title) {
+  return { title, todos: [] };
 }
