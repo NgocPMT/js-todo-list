@@ -7,7 +7,7 @@ const projectController = (function () {
     projects.push(generateProject(name));
   };
 
-  const handleAddToProject = (todo) => {
+  const pushTodo = (todo) => {
     const addingProject = projects.find(
       (project) => project.name === todo.getProjectName()
     );
@@ -17,7 +17,15 @@ const projectController = (function () {
     }
   };
 
-  return { createProject, handleAddToProject, projects };
+  const deleteProject = (name) => {
+    const deletingProject = projects.find((project) => (project.name = name));
+
+    if (deletingProject) {
+      projects.splice(projects.indexOf(deletingProject), 1);
+    }
+  };
+
+  return { projects, createProject, pushTodo, deleteProject };
 })();
 
 export default projectController;
