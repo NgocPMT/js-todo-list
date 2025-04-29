@@ -5,7 +5,14 @@ const todoController = (function () {
 
   const createTodo = (title, dueDate, priority, projectName, checked) => {
     todos.push(
-      generateTodo({ title, dueDate, priority, projectName, checked })
+      generateTodo({
+        UID: crypto.randomUUID(),
+        title,
+        dueDate,
+        priority,
+        projectName,
+        checked,
+      })
     );
   };
 

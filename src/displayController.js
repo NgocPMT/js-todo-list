@@ -3,7 +3,7 @@ import todoController from "./todoController";
 
 const displayController = (function () {
   const renderTodos = () => {
-    const root = document.querySelector("#root");
+    const root = document.querySelector("#main-content");
 
     const todos = todoController.getTodos();
     todos.forEach((todo) => {
@@ -18,7 +18,10 @@ const displayController = (function () {
           .map(
             (todo) => `
           <div class="todo">
-            <p class="todo-title">${todo.getTitle()}</p>
+            <label for="todo-${todo.getUID()}-check" class="todo-title">
+              <input id="todo-${todo.getUID()}-check" type="checkbox" name="todo-check" data-uid=${todo.getUID()}/>
+              ${todo.getTitle()}
+            </label>
           </div>
         `
           )
@@ -26,6 +29,7 @@ const displayController = (function () {
         return `
         <div class="project">
           <h2 class="project-title">${project.title}</h2>
+          <hr/>
           <div class="todo-container">
             ${projectTodos}
           </div>

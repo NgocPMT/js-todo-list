@@ -68,6 +68,38 @@ html, body {
   font-size: 1.75rem;
 }
 
+#main-content {
+  padding: 3rem 5rem;
+  display: grid;
+  grid-auto-rows: auto auto auto;
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.project-title {
+  font-size: 2rem;
+  text-transform: capitalize;
+  color: #1469c4;
+}
+
+.todo-container {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.todo-title {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+}
+
 
 
 

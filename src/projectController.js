@@ -1,7 +1,7 @@
 import generateProject from "./project";
 
 const projectController = (function () {
-  const projects = [generateProject("default")];
+  const projects = [generateProject("general")];
 
   const createProject = (title) => {
     projects.push(generateProject(title));
