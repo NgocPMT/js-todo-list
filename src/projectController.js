@@ -1,8 +1,7 @@
 import generateProject from "./project";
-import generateTodo from "./todo";
 
 const projectController = (function () {
-  const projects = [];
+  const projects = [generateProject("default")];
 
   const createProject = (name) => {
     projects.push(generateProject(name));
