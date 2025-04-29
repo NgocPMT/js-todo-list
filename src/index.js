@@ -1,3 +1,4 @@
 import "./css/style.css";
+import projectController from "./projectController";
 
-console.log("hello world");
+projectController.createProject("default");

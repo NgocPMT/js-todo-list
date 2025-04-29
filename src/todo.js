@@ -2,6 +2,8 @@ export default function generateTodo(state) {
   const _state = { ...state };
 
   return {
+    getUID: () => _state.UID,
+
     getTitle: () => _state.title,
 
     setTitle: (newTitle) => {
