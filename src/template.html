@@ -6,17 +6,47 @@
     <title>Todo List</title>
   </head>
   <body>
-    <section id="sidebar">
-      <div id="logo"></div>
-      <div id="date-filters">
-        <button id="today-filter">Today</button>
-        <button id="upcoming-filter">Upcoming</button>
-        <button id="anytime-filter">Anytime</button>
-      </div>
-      <div id="project-filters">
-        <button id="default">Default</button>
-      </div>
-    </section>
-    <div id="root"></div>
+    <div class="body-wrapper">
+      <section id="sidebar">
+        <div id="date-filters">
+          <button id="today-filter">
+            <span class="filter-content"
+              ><img src="./img/today.svg" alt="" />Today</span
+            >
+          </button>
+          <button id="upcoming-filter">
+            <span class="filter-content"
+              ><img src="./img/upcoming.svg" alt="" />Upcoming</span
+            >
+          </button>
+          <button id="anytime-filter">
+            <span class="filter-content"
+              ><img src="./img/anytime.svg" alt="" />Anytime</span
+            >
+          </button>
+        </div>
+        <div id="project-filters">
+          <h2 id="project-filters-title">Projects</h2>
+          <button id="default">
+            <span class="filter-content"
+              ><img src="./img/current-project.svg" alt="" />Default</span
+            >
+          </button>
+          <button>
+            <span class="filter-content"
+              ><img src="./img/current-project.svg" alt="" />Place holder
+              1</span
+            >
+          </button>
+          <button>
+            <span class="filter-content"
+              ><img src="./img/current-project.svg" alt="" />Place holder
+              2</span
+            >
+          </button>
+        </div>
+      </section>
+      <div id="root"></div>
+    </div>
   </body>
 </html>
