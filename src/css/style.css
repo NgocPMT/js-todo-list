@@ -103,10 +103,27 @@ html, body {
   margin-bottom: 2.5rem;
 }
 
+.project-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .project-title {
   font-size: 2rem;
   text-transform: capitalize;
   color: #1469c4;
+}
+
+.project-detail {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.project-detail img {
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 .no-task-announce {

@@ -1,6 +1,7 @@
 import projectController from "./projectController";
 import todoController from "./todoController";
 import projectIcon from "./img/current-project.svg";
+import detailIcon from "./img/details.svg";
 
 const displayController = (function () {
   const renderTodos = () => {
@@ -12,7 +13,7 @@ const displayController = (function () {
       .map((project) => {
         if (project.todos.length === 0) {
           return `
-            <div class="project">
+        <div class="project">
           <h2 class="project-title">${project.title}</h2>
           <hr/>
           <p class="no-task-announce">There is no task yet...</p>
@@ -34,7 +35,12 @@ const displayController = (function () {
           .join("");
         return `
         <div class="project">
-          <h2 class="project-title">${project.title}</h2>
+          <div class="project-title-wrapper">
+            <h2 class="project-title">${project.title}</h2>
+            <button class="project-detail">
+              <img src=${detailIcon} aria-label="more"/>
+            </button>
+          </div>
           <hr/>
           <div class="todo-container">
             ${projectTodos}
