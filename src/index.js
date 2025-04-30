@@ -28,3 +28,4 @@ todoController.createTodo(
 
 console.log(todoController.getTodos());
 displayController.renderTodos();
+displayController.renderProjects();

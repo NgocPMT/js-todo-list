@@ -49,6 +49,7 @@ html, body {
   align-items: center;
   gap: 5%;
   font-size: 1.25rem;
+  text-transform: capitalize;
 }
 
 .filter-content img {
@@ -66,6 +67,10 @@ html, body {
 #project-filters-title {
   margin: 0 0 1.5rem 1rem;
   font-size: 1.75rem;
+}
+
+#project-filter-container {
+  width: 100%;
 }
 
 #main-content {

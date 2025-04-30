@@ -1,5 +1,6 @@
 import projectController from "./projectController";
 import todoController from "./todoController";
+import projectIcon from "./img/current-project.svg";
 
 const displayController = (function () {
   const renderTodos = () => {
@@ -36,7 +37,29 @@ const displayController = (function () {
     mainContent.innerHTML = content;
   };
 
-  return { renderTodos };
+  const renderProjects = () => {
+    const projectFilterContainer = document.querySelector(
+      "#project-filter-container"
+    );
+
+    const projects = projectController.getProjects();
+
+    const projectFilters = projects
+      .map(
+        (project) => `
+        <button data-title="${project.title}">
+            <span class="filter-content"
+              ><img src=${projectIcon} alt="" />${project.title}</span
+            >
+        </button>
+      `
+      )
+      .join("");
+
+    projectFilterContainer.innerHTML = projectFilters;
+  };
+
+  return { renderTodos, renderProjects };
 })();
 
 export default displayController;
