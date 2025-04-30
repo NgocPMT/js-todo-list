@@ -94,14 +94,13 @@ html, body {
 
 #main-content {
   padding: 3rem 5rem;
-  display: grid;
-  grid-auto-rows: auto auto auto;
 }
 
 .project {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .project-title {
