@@ -34,6 +34,26 @@
         </div>
       </section>
       <main id="main-content"></main>
+
+      <dialog id="new-project-modal" tabindex="-1">
+        <form id="new-project-form">
+          <div class="form-field">
+            <label for="project-name"> </label>
+            <input
+              id="project-name"
+              type="text"
+              name="project-name"
+              required
+              minlength="2"
+              maxlength="20"
+            />
+          </div>
+          <div class="new-project-buttons">
+            <button id="new-project-close" type="button">Close</button>
+            <button id="new-project-submit" type="submit">Submit</button>
+          </div>
+        </form>
+      </dialog>
     </div>
   </body>
 </html>

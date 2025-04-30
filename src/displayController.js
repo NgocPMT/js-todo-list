@@ -59,7 +59,21 @@ const displayController = (function () {
     projectFilterContainer.innerHTML = projectFilters;
   };
 
-  return { renderTodos, renderProjects };
+  const addNewProjectEventListener = () => {
+    const newProjectBtn = document.querySelector("#new-project-btn");
+    const newProjectModal = document.querySelector("#new-project-modal");
+    const newProjectClose = document.querySelector("#new-project-close");
+
+    newProjectBtn.addEventListener("click", () => newProjectModal.show());
+    newProjectClose.addEventListener("click", () => newProjectModal.close());
+    newProjectModal.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      newProjectModal.close();
+    });
+  };
+
+  return { renderTodos, renderProjects, addNewProjectEventListener };
 })();
 
 export default displayController;
