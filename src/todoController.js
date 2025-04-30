@@ -1,19 +1,22 @@
 import generateTodo from "./todo";
+import projectController from "./projectController";
 
 const todoController = (function () {
   const todos = [];
 
   const createTodo = (title, dueDate, priority, projectName, checked) => {
-    todos.push(
-      generateTodo({
-        UID: crypto.randomUUID(),
-        title,
-        dueDate,
-        priority,
-        projectName,
-        checked,
-      })
-    );
+    const newTodo = generateTodo({
+      UID: crypto.randomUUID(),
+      title,
+      dueDate,
+      priority,
+      projectName,
+      checked,
+    });
+
+    todos.push(newTodo);
+
+    projectController.pushTodo(newTodo);
   };
 
   const getTodos = () => {
