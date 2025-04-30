@@ -64,7 +64,7 @@ const displayController = (function () {
     const newProjectModal = document.querySelector("#new-project-modal");
     const newProjectClose = document.querySelector("#new-project-close");
 
-    newProjectBtn.addEventListener("click", () => newProjectModal.show());
+    newProjectBtn.addEventListener("click", () => newProjectModal.showModal());
     newProjectClose.addEventListener("click", () => newProjectModal.close());
     newProjectModal.addEventListener("submit", (event) => {
       event.preventDefault();

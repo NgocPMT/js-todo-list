@@ -124,6 +124,57 @@ html, body {
   font-size: 1.25rem;
 }
 
+#new-project-modal {
+  margin: 0 auto;
+  top: 25%;
+  width: 40%;
+  padding: 2rem 2rem;
+  font-size: 1.5rem;
+  border: none;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 0.75rem;
+}
+
+#new-project-form label{
+  display: block;
+  text-align: center;
+}
+
+#new-project-form input {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 75%;
+  border: none;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+}
+
+.new-project-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-project-buttons button {
+  font-size: 1.125rem;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-color: #1469c4;
+  color: white;
+  transition: opacity 0.2s;
+}
+
+#new-project-close {
+  background-color: #818181;
+}
+
+.new-project-buttons button:hover {
+  opacity: 0.8;
+}
+
 
 
 
