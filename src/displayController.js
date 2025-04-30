@@ -130,6 +130,7 @@ const displayController = (function () {
         const projectTitle = button.dataset.title;
         projectController.deleteProject(projectTitle);
         renderTodos();
+        renderProjects();
       });
     });
   };
