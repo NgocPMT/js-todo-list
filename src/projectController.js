@@ -17,6 +17,8 @@ const projectController = (function () {
     if (addingProject) {
       addingProject.todos.push(todo);
     }
+
+    addingProject.todos.sort((t1, t2) => t1.getPriority() - t2.getPriority());
   };
 
   const deleteProject = (title) => {
