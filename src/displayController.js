@@ -69,6 +69,11 @@ const displayController = (function () {
     newProjectModal.addEventListener("submit", (event) => {
       event.preventDefault();
 
+      const projectTitle = document.querySelector("#project-title").value;
+
+      projectController.createProject(projectTitle);
+      renderProjects();
+      renderTodos();
       newProjectModal.close();
     });
   };
