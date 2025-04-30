@@ -19,7 +19,7 @@ html, body {
 #sidebar {
   background-color: #f5f6f7;
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto 1fr;
   padding: 2rem 0 1rem 0;
 }
 
@@ -68,19 +68,30 @@ html, body {
   position: relative;
 }
 
-
 #new-project-btn {
   position: absolute;
-  font-size: 1.25rem;
   bottom: -1rem;
   left: 0;
-  color: #818181;
 }
 
-#new-project-btn span{
+#new-project-btn span, #new-todo-btn span{
   display: flex;
   align-items: center;
   gap: 5%;
+  font-size: 1.25rem;
+  color: #818181;
+}
+
+#new-todo-btn span {
+  color: #1469c4;
+}
+
+#new-todo-btn img {
+  width: 12%;
+}
+
+.new-todo-btn-wrapper {
+  margin-bottom: 1rem;
 }
 
 #project-filters-title {
@@ -170,6 +181,11 @@ html, body {
   grid-template-columns: 1.5rem 1fr;
   gap: 0.5rem;
   font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.todo-title input {
+  cursor: pointer;
 }
 
 #new-project-modal {
