@@ -64,6 +64,25 @@ html, body {
   width: 13%;
 }
 
+#project-filters {
+  position: relative;
+}
+
+
+#new-project-btn {
+  position: absolute;
+  font-size: 1.25rem;
+  bottom: -1rem;
+  left: 0;
+  color: #818181;
+}
+
+#new-project-btn span{
+  display: flex;
+  align-items: center;
+  gap: 5%;
+}
+
 #project-filters-title {
   margin: 0 0 1.5rem 1rem;
   font-size: 1.75rem;
