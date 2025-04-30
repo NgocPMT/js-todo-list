@@ -3,12 +3,7 @@ import todoController from "./todoController";
 
 const displayController = (function () {
   const renderTodos = () => {
-    const root = document.querySelector("#main-content");
-
-    const todos = todoController.getTodos();
-    todos.forEach((todo) => {
-      projectController.pushTodo(todo);
-    });
+    const mainContent = document.querySelector("#main-content");
 
     const projects = projectController.getProjects();
 
@@ -38,7 +33,7 @@ const displayController = (function () {
       })
       .join("");
 
-    root.innerHTML = content;
+    mainContent.innerHTML = content;
   };
 
   return { renderTodos };
