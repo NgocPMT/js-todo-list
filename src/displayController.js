@@ -19,10 +19,10 @@ const displayController = (function () {
             <button class="project-detail" data-title=${project.title}>
               <img src=${detailIcon} aria-label="more"/>
             </button>
-            <div class="project-dropdown hidden">
-              <button class="delete-project" data-title=${project.title}>Delete project</button>
+            <div class="project-dropdown hidden" data-title=${project.title}>
+              <button class="delete-project" data-title=${project.title}>Delete Project</button>
             </div>
-          </div>
+          </div>  
           <hr/>
           <p class="no-task-announce">There are no tasks yet...</p>
         </div>
@@ -62,6 +62,7 @@ const displayController = (function () {
       .join("");
 
     mainContent.innerHTML = content;
+    addProjectDetailsEventListeners();
   };
 
   const renderProjects = () => {
@@ -126,7 +127,8 @@ const displayController = (function () {
 
     deleteButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        projectController.deleteProject(button.dataset.title);
+        const projectTitle = button.dataset.title;
+        projectController.deleteProject(projectTitle);
         renderTodos();
       });
     });
@@ -136,7 +138,6 @@ const displayController = (function () {
     renderTodos,
     renderProjects,
     addNewProjectEventListeners,
-    addProjectDetailsEventListeners,
   };
 })();
 

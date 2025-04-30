@@ -22,7 +22,7 @@ const projectController = (function () {
   };
 
   const deleteProject = (title) => {
-    const deletingProject = projects.find((project) => (project.title = title));
+    const deletingProject = projects.find((project) => project.title === title);
 
     if (deletingProject) {
       projects.splice(projects.indexOf(deletingProject), 1);
