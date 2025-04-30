@@ -10,6 +10,16 @@ const displayController = (function () {
 
     const content = projects
       .map((project) => {
+        if (project.todos.length === 0) {
+          return `
+            <div class="project">
+          <h2 class="project-title">${project.title}</h2>
+          <hr/>
+          <p class="no-task-announce">There is no task yet...</p>
+        </div>
+          `;
+        }
+
         const projectTodos = project.todos
           .map(
             (todo) => `

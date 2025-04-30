@@ -109,6 +109,12 @@ html, body {
   color: #1469c4;
 }
 
+.no-task-announce {
+  font-size: 1.125rem;
+  font-style: italic;
+  color: #818181;
+}
+
 .todo-container {
   margin-top: 0.5rem;
   display: flex;
