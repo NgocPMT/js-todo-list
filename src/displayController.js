@@ -14,9 +14,17 @@ const displayController = (function () {
         if (project.todos.length === 0) {
           return `
         <div class="project">
-          <h2 class="project-title">${project.title}</h2>
+          <div class="project-title-wrapper">
+            <h2 class="project-title">${project.title}</h2>
+            <button class="project-detail" data-title=${project.title}>
+              <img src=${detailIcon} aria-label="more"/>
+            </button>
+            <div class="project-dropdown hidden">
+              <button class="delete-project" data-title=${project.title}>Delete project</button>
+            </div>
+          </div>
           <hr/>
-          <p class="no-task-announce">There is no task yet...</p>
+          <p class="no-task-announce">There are no tasks yet...</p>
         </div>
           `;
         }
@@ -37,9 +45,12 @@ const displayController = (function () {
         <div class="project">
           <div class="project-title-wrapper">
             <h2 class="project-title">${project.title}</h2>
-            <button class="project-detail">
+            <button class="project-detail" data-title=${project.title}>
               <img src=${detailIcon} aria-label="more"/>
             </button>
+            <div class="project-dropdown hidden" data-title=${project.title}>
+              <button class="delete-project" data-title=${project.title}>Delete Project</button>
+            </div>
           </div>
           <hr/>
           <div class="todo-container">
@@ -75,7 +86,7 @@ const displayController = (function () {
     projectFilterContainer.innerHTML = projectFilters;
   };
 
-  const addNewProjectEventListener = () => {
+  const addNewProjectEventListeners = () => {
     const newProjectBtn = document.querySelector("#new-project-btn");
     const newProjectModal = document.querySelector("#new-project-modal");
     const newProjectClose = document.querySelector("#new-project-close");
@@ -94,7 +105,39 @@ const displayController = (function () {
     });
   };
 
-  return { renderTodos, renderProjects, addNewProjectEventListener };
+  const addProjectDetailsEventListeners = () => {
+    const detailButtons = document.querySelectorAll(".project-detail");
+    const deleteButtons = document.querySelectorAll(".delete-project");
+    const projectDropdowns = document.querySelectorAll(".project-dropdown");
+
+    detailButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        projectDropdowns.forEach((dropdown) => {
+          if (dropdown.dataset.title === button.dataset.title) {
+            if (dropdown.classList.contains("hidden")) {
+              dropdown.classList.remove("hidden");
+            } else {
+              dropdown.classList.add("hidden");
+            }
+          }
+        });
+      });
+    });
+
+    deleteButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        projectController.deleteProject(button.dataset.title);
+        renderTodos();
+      });
+    });
+  };
+
+  return {
+    renderTodos,
+    renderProjects,
+    addNewProjectEventListeners,
+    addProjectDetailsEventListeners,
+  };
 })();
 
 export default displayController;
