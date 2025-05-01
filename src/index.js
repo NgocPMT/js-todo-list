@@ -31,3 +31,4 @@ displayController.renderTodos();
 displayController.renderProjects();
 displayController.addNewProjectEventListeners();
 displayController.addNewTaskEventListeners();
+displayController.addFilterEventListeners();

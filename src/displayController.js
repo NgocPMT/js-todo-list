@@ -72,6 +72,80 @@ const displayController = (function () {
     addTaskDetailsEventListeners();
   };
 
+  const renderTodayTodos = () => {
+    const todos = todoController.getTodayTodos();
+
+    const todayTodos = todos
+      .map(
+        (todo) => `
+          <div class="todo">
+            <button class="todo-details" data-uid=${todo.getUID()}><img src=${detailIconVert} aria-label="more"/></button>
+            <div class="todo-dropdown hidden" data-uid=${todo.getUID()}>
+              <button class="todo-info" data-uid=${todo.getUID()} data-title="${todo.getTitle()}" data-due-date="${todo.getDueDate()}" data-priority="${todo.getPriority()}">Task Information</button>
+              <button class="todo-delete" data-uid=${todo.getUID()}>Delete Task</button>
+            </div>
+            <label for="todo-${todo.getUID()}-check" class="todo-title">
+              <input id="todo-${todo.getUID()}-check" type="checkbox" name="todo-check" data-uid=${todo.getUID()}/>
+              ${todo.getTitle()}
+            </label>
+          </div>
+        `
+      )
+      .join("");
+    const mainContent = document.querySelector("#main-content");
+
+    mainContent.innerHTML = `
+      <div class="project">
+          <div class="project-title-wrapper">
+            <h2 class="project-title">Today Tasks</h2>
+          </div>  
+          <hr/>
+          <div class="todo-container">
+            ${todayTodos}
+          </div>
+      </div>
+    `;
+
+    addTaskDetailsEventListeners();
+  };
+
+  const renderUpcomingTodos = () => {
+    const todos = todoController.getUpcomingTodos();
+
+    const upcomingTodos = todos
+      .map(
+        (todo) => `
+          <div class="todo">
+            <button class="todo-details" data-uid=${todo.getUID()}><img src=${detailIconVert} aria-label="more"/></button>
+            <div class="todo-dropdown hidden" data-uid=${todo.getUID()}>
+              <button class="todo-info" data-uid=${todo.getUID()} data-title="${todo.getTitle()}" data-due-date="${todo.getDueDate()}" data-priority="${todo.getPriority()}">Task Information</button>
+              <button class="todo-delete" data-uid=${todo.getUID()}>Delete Task</button>
+            </div>
+            <label for="todo-${todo.getUID()}-check" class="todo-title">
+              <input id="todo-${todo.getUID()}-check" type="checkbox" name="todo-check" data-uid=${todo.getUID()}/>
+              ${todo.getTitle()}
+            </label>
+          </div>
+        `
+      )
+      .join("");
+    const mainContent = document.querySelector("#main-content");
+
+    mainContent.innerHTML = `
+      <div class="project">
+          <div class="project-title-wrapper">
+            <h2 class="project-title">Upcoming Tasks</h2>
+          </div>  
+          <hr/>
+          <div class="todo-container">
+            ${upcomingTodos}
+          </div>
+      </div>
+    `;
+
+    addTaskDetailsEventListeners();
+  };
+
   const renderProjects = () => {
     const projectFilterContainer = document.querySelector(
       "#project-filter-container"
@@ -303,11 +377,22 @@ const displayController = (function () {
     });
   };
 
+  const addFilterEventListeners = () => {
+    const todayFilter = document.querySelector("#today-filter");
+    const upcomingFilter = document.querySelector("#upcoming-filter");
+    const anytimeFilter = document.querySelector("#anytime-filter");
+
+    todayFilter.addEventListener("click", () => renderTodayTodos());
+    upcomingFilter.addEventListener("click", () => renderUpcomingTodos());
+    anytimeFilter.addEventListener("click", () => renderTodos());
+  };
+
   return {
     renderTodos,
     renderProjects,
     addNewProjectEventListeners,
     addNewTaskEventListeners,
+    addFilterEventListeners,
   };
 })();
 
