@@ -69,6 +69,9 @@ const displayController = (function () {
     const projectFilterContainer = document.querySelector(
       "#project-filter-container"
     );
+    const ProjectNameSelect = document.querySelector(
+      "#task-project-name-select"
+    );
 
     const projects = projectController.getProjects();
 
@@ -84,7 +87,14 @@ const displayController = (function () {
       )
       .join("");
 
+    const projectOptions = projects.map(
+      (project) => `
+        <option value=${project.title}>${project.title}</option>
+      `
+    );
+
     projectFilterContainer.innerHTML = projectFilters;
+    ProjectNameSelect.innerHTML = projectOptions;
   };
 
   const addNewProjectEventListeners = () => {

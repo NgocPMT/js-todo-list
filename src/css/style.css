@@ -273,6 +273,7 @@ select {
   width: 100%;
   margin-bottom: 1rem;
   border-radius: 0.75rem;
+  text-transform: capitalize;
 }
 
 
@@ -313,6 +314,7 @@ select {
   background-color: #1469c4;
   color: white;
 }
+
 
 
 
