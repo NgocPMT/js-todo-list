@@ -360,6 +360,87 @@ select {
   display: none;
 }
 
+#task-info {
+  margin: 0 auto;
+  top: 20%;
+  width: 35%;
+  padding: 2rem;
+  border: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-radius: 0.75rem;
+  font-size: 1.5rem;
+}
+
+.task-info-title {
+  font-size: 2rem;
+  color: #1469c4;
+  margin-bottom: 1rem;
+}
+
+.task-info-due-date, .task-info-priority {
+  margin-bottom: 0.5rem;
+}
+
+.task-info-close {
+  margin-top: 1rem;
+  font-size: 1rem;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  background-color: #818181;
+  color: white;
+}
+
+#deletion-confirm {
+  margin: 0 auto;
+  top: 25%;
+  width: 35%;
+  font-size: 1.5rem;
+  padding: 2rem;
+  border: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-radius: 0.75rem;
+  color: red;
+  text-align: center;
+}
+
+.deletion-buttons {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 1.5rem;
+  gap: 0.75rem
+}
+
+.deletion-buttons button {
+  font-size: 1.125rem;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  color: white;
+}
+
+.deletion-buttons button:hover {
+  opacity: 0.7;
+}
+
+.deletion-no {
+  background-color: #1469c4;
+}
+
+.deletion-yes {
+  background-color: red;
+}
+
+
+
+
+
+
 
 
 

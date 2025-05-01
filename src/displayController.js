@@ -36,7 +36,7 @@ const displayController = (function () {
           <div class="todo">
             <button class="todo-details" data-uid=${todo.getUID()}><img src=${detailIconVert} aria-label="more"/></button>
             <div class="todo-dropdown hidden" data-uid=${todo.getUID()}>
-              <button class="todo-info" data-uid=${todo.getUID()}>Task Information</button>
+              <button class="todo-info" data-uid=${todo.getUID()} data-title="${todo.getTitle()}" data-due-date="${todo.getDueDate()}" data-priority="${todo.getPriority()}">Task Information</button>
               <button class="todo-delete" data-uid=${todo.getUID()}>Delete Task</button>
             </div>
             <label for="todo-${todo.getUID()}-check" class="todo-title">
@@ -196,11 +196,13 @@ const displayController = (function () {
   const addTaskDetailsEventListeners = () => {
     const detailButtons = document.querySelectorAll(".todo-details");
     const taskDropdowns = document.querySelectorAll(".todo-dropdown");
+    const infoButtons = document.querySelectorAll(".todo-info");
+    const deleteButtons = document.querySelectorAll(".todo-delete");
 
     detailButtons.forEach((button) => {
       button.addEventListener("click", () => {
         taskDropdowns.forEach((dropdown) => {
-          let taskUID = button.dataset.uid;
+          const taskUID = button.dataset.uid;
           if (
             dropdown.classList.contains("hidden") &&
             dropdown.dataset.uid === taskUID
@@ -210,6 +212,67 @@ const displayController = (function () {
             dropdown.classList.add("hidden");
           }
         });
+      });
+    });
+
+    infoButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const title = button.dataset.title;
+        const dueDate = button.dataset.dueDate;
+        const priority = button.dataset.priority;
+
+        const taskInfoDialog = document.querySelector("dialog#task-info");
+
+        taskInfoDialog.innerHTML = `
+        <h3 class="task-info-title">${title}</h3>
+        <p class="task-info-due-date">Due Date: ${dueDate}</p>
+        <p class="task-info-priority">Priority: ${priority}</p>
+        <button class="task-info-close">Close</button>
+      `;
+
+        const closeButton = document.querySelector(".task-info-close");
+        closeButton.addEventListener("click", () => {
+          taskInfoDialog.innerHTML = "";
+          taskInfoDialog.close();
+        });
+
+        taskInfoDialog.showModal();
+      });
+    });
+
+    deleteButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const UID = button.dataset.uid;
+        console.log(UID);
+
+        const deletionConfirmDialog =
+          document.querySelector("#deletion-confirm");
+
+        deletionConfirmDialog.innerHTML = `
+          <p class="deletion-confirm">Do you really want to delete this task?</p>
+          <div class="deletion-buttons">
+            <button class="deletion-no">No</button>
+            <button class="deletion-yes">Yes</button>
+          </div>
+        `;
+
+        const noButton = document.querySelector(".deletion-no");
+        const yesButton = document.querySelector(".deletion-yes");
+
+        noButton.addEventListener("click", () => {
+          deletionConfirmDialog.innerHTML = "";
+          deletionConfirmDialog.close();
+        });
+
+        yesButton.addEventListener("click", () => {
+          todoController.deleteTodo(UID);
+          projectController.deleteTodo(UID);
+          deletionConfirmDialog.innerHTML = "";
+          deletionConfirmDialog.close();
+          renderTodos();
+        });
+
+        deletionConfirmDialog.showModal();
       });
     });
   };

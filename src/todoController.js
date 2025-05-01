@@ -28,8 +28,7 @@ const todoController = (function () {
   };
 
   const deleteTodo = (UID) => {
-    const deletingTodo = todos.find((todo) => (todo.UID = UID));
-
+    const deletingTodo = todos.find((todo) => todo.getUID() === UID);
     if (deletingTodo) {
       todos.splice(todos.indexOf(deletingTodo), 1);
     }

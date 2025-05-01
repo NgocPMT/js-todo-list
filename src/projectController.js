@@ -29,7 +29,17 @@ const projectController = (function () {
     }
   };
 
-  return { getProjects, createProject, pushTodo, deleteProject };
+  const deleteTodo = (UID) => {
+    projects.forEach((project) => {
+      const deletingTodo = project.todos.find((todo) => todo.getUID() === UID);
+      if (deletingTodo) {
+        project.todos.splice(project.todos.indexOf(deletingTodo), 1);
+        return;
+      }
+    });
+  };
+
+  return { getProjects, createProject, pushTodo, deleteProject, deleteTodo };
 })();
 
 export default projectController;
