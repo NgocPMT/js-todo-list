@@ -147,10 +147,36 @@ const displayController = (function () {
 
     deleteButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        const projectTitle = button.dataset.title;
-        projectController.deleteProject(projectTitle);
-        renderTodos();
-        renderProjects();
+        const title = button.dataset.title;
+
+        const deletionConfirmDialog =
+          document.querySelector("#deletion-confirm");
+
+        deletionConfirmDialog.innerHTML = `
+          <p class="deletion-confirm">Do you really want to delete this project?</p>
+          <div class="deletion-buttons">
+            <button class="deletion-no">No</button>
+            <button class="deletion-yes">Yes</button>
+          </div>
+        `;
+
+        const noButton = document.querySelector(".deletion-no");
+        const yesButton = document.querySelector(".deletion-yes");
+
+        noButton.addEventListener("click", () => {
+          deletionConfirmDialog.innerHTML = "";
+          deletionConfirmDialog.close();
+        });
+
+        yesButton.addEventListener("click", () => {
+          projectController.deleteProject(title);
+          deletionConfirmDialog.innerHTML = "";
+          deletionConfirmDialog.close();
+          renderTodos();
+          renderProjects();
+        });
+
+        deletionConfirmDialog.showModal();
       });
     });
   };
