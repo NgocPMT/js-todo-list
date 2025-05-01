@@ -2,6 +2,7 @@ import projectController from "./projectController";
 import todoController from "./todoController";
 import projectIcon from "./img/current-project.svg";
 import detailIcon from "./img/details.svg";
+import detailIconVert from "./img/details-vert.svg";
 
 const displayController = (function () {
   const renderTodos = () => {
@@ -33,6 +34,11 @@ const displayController = (function () {
           .map(
             (todo) => `
           <div class="todo">
+            <button class="todo-details"><img src=${detailIconVert} aria-label="more"/></button>
+            <div class="todo-dropdown">
+              <button class="todo-info">Task Information</button>
+              <button class="todo-delete">Delete Task</button>
+            </div>
             <label for="todo-${todo.getUID()}-check" class="todo-title">
               <input id="todo-${todo.getUID()}-check" type="checkbox" name="todo-check" data-uid=${todo.getUID()}/>
               ${todo.getTitle()}
