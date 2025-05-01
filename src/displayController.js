@@ -101,10 +101,11 @@ const displayController = (function () {
     const newProjectBtn = document.querySelector("#new-project-btn");
     const newProjectModal = document.querySelector("#new-project-modal");
     const newProjectClose = document.querySelector("#new-project-close");
+    const newProjectForm = document.querySelector("#new-project-form");
 
     newProjectBtn.addEventListener("click", () => newProjectModal.showModal());
     newProjectClose.addEventListener("click", () => newProjectModal.close());
-    newProjectModal.addEventListener("submit", (event) => {
+    newProjectForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
       const projectTitle = document.querySelector("#project-title").value;
@@ -112,6 +113,7 @@ const displayController = (function () {
       projectController.createProject(projectTitle);
       renderProjects();
       renderTodos();
+      newProjectForm.reset();
       newProjectModal.close();
     });
   };
@@ -156,6 +158,29 @@ const displayController = (function () {
     });
 
     newTaskClose.addEventListener("click", () => {
+      newTaskModal.close();
+    });
+
+    newTaskForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const taskTitle = document.querySelector("#task-title").value;
+      const taskDueDate = document.querySelector("#task-due-date").value;
+      const taskPriority = document.querySelector("#task-priority").value;
+      const taskProjectName = document.querySelector(
+        "#task-project-name-select"
+      ).value;
+
+      todoController.createTodo(
+        taskTitle,
+        taskDueDate,
+        taskPriority,
+        taskProjectName
+      );
+
+      renderTodos();
+
+      newTaskForm.reset();
       newTaskModal.close();
     });
   };
