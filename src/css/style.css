@@ -138,10 +138,6 @@ html, body {
   height: 2.5rem;
 }
 
-.hidden {
-  display: none;
-}
-
 .project-dropdown {
   position: absolute;
   top: 100%;
@@ -360,6 +356,9 @@ select {
   color: white;
 }
 
+.hidden {
+  display: none;
+}
 
 
 

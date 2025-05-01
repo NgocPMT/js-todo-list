@@ -34,10 +34,10 @@ const displayController = (function () {
           .map(
             (todo) => `
           <div class="todo">
-            <button class="todo-details"><img src=${detailIconVert} aria-label="more"/></button>
-            <div class="todo-dropdown">
-              <button class="todo-info">Task Information</button>
-              <button class="todo-delete">Delete Task</button>
+            <button class="todo-details" data-uid=${todo.getUID()}><img src=${detailIconVert} aria-label="more"/></button>
+            <div class="todo-dropdown hidden" data-uid=${todo.getUID()}>
+              <button class="todo-info" data-uid=${todo.getUID()}>Task Information</button>
+              <button class="todo-delete" data-uid=${todo.getUID()}>Delete Task</button>
             </div>
             <label for="todo-${todo.getUID()}-check" class="todo-title">
               <input id="todo-${todo.getUID()}-check" type="checkbox" name="todo-check" data-uid=${todo.getUID()}/>
@@ -69,6 +69,7 @@ const displayController = (function () {
 
     mainContent.innerHTML = content;
     addProjectDetailsEventListeners();
+    addTaskDetailsEventListeners();
   };
 
   const renderProjects = () => {
@@ -188,6 +189,27 @@ const displayController = (function () {
 
       newTaskForm.reset();
       newTaskModal.close();
+    });
+  };
+
+  const addTaskDetailsEventListeners = () => {
+    const detailButtons = document.querySelectorAll(".todo-details");
+    const taskDropdowns = document.querySelectorAll(".todo-dropdown");
+
+    detailButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        taskDropdowns.forEach((dropdown) => {
+          let taskUID = button.dataset.uid;
+          if (
+            dropdown.classList.contains("hidden") &&
+            dropdown.dataset.uid === taskUID
+          ) {
+            dropdown.classList.remove("hidden");
+          } else {
+            dropdown.classList.add("hidden");
+          }
+        });
+      });
     });
   };
 
