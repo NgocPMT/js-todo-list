@@ -1,5 +1,6 @@
 import generateTodo from "./todo";
 import projectController from "./projectController";
+import { format } from "date-fns";
 
 const todoController = (function () {
   const todos = [];
@@ -34,7 +35,16 @@ const todoController = (function () {
     }
   };
 
-  return { createTodo, getTodos, deleteTodo };
+  const getTodayTodos = () => {
+    const today = format(new Date(), "yyyy-MM-dd");
+    console.log(today);
+
+    const todayTodos = todos.filter((todo) => todo.getDueDate() === today);
+
+    return todayTodos;
+  };
+
+  return { createTodo, getTodos, deleteTodo, getTodayTodos };
 })();
 
 export default todoController;
