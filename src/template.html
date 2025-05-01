@@ -81,8 +81,6 @@
               type="date"
               name="task-due-date"
               required
-              minlength="2"
-              maxlength="20"
             />
           </div>
           <div class="form-field">
@@ -92,13 +90,15 @@
               type="number"
               name="task-priority"
               required
-              minlength="2"
-              maxlength="20"
+              min="1"
+              max="5"
             />
           </div>
           <div class="form-field">
-            <label for="task-project-name">Project</label>
-            <select id="task-project-name"></select>
+            <label for="task-project-name-select">Project</label>
+            <select id="task-project-name-select" name="task-project-name">
+              <option value="general">General</option>
+            </select>
           </div>
           <div class="new-task-buttons">
             <button id="new-task-close" type="button">Close</button>
