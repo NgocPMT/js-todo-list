@@ -146,7 +146,73 @@ const displayController = (function () {
     addTaskDetailsEventListeners();
   };
 
-  const renderProjects = () => {
+  const renderProject = (title) => {
+    const mainContent = document.querySelector("#main-content");
+    const projects = projectController.getProjects();
+    const renderingProject = projects.find(
+      (project) => project.title === title
+    );
+
+    let content = "";
+
+    if (renderingProject.todos.length === 0) {
+      content = `
+        <div class="project">
+          <div class="project-title-wrapper">
+            <h2 class="project-title">${renderingProject.title}</h2>
+            <button class="project-detail" data-title=${renderingProject.title}>
+              <img src=${detailIcon} aria-label="more"/>
+            </button>
+            <div class="project-dropdown hidden" data-title=${renderingProject.title}>
+              <button class="delete-project" data-title=${renderingProject.title}>Delete Project</button>
+            </div>
+          </div>  
+          <hr/>
+          <p class="no-task-announce">There are no tasks yet...</p>
+        </div>
+          `;
+    } else {
+      const projectTodos = renderingProject.todos
+        .map(
+          (todo) => `
+          <div class="todo">
+            <button class="todo-details" data-uid=${todo.getUID()}><img src=${detailIconVert} aria-label="more"/></button>
+            <div class="todo-dropdown hidden" data-uid=${todo.getUID()}>
+              <button class="todo-info" data-uid=${todo.getUID()} data-title="${todo.getTitle()}" data-due-date="${todo.getDueDate()}" data-priority="${todo.getPriority()}">Task Information</button>
+              <button class="todo-delete" data-uid=${todo.getUID()}>Delete Task</button>
+            </div>
+            <label for="todo-${todo.getUID()}-check" class="todo-title">
+              <input id="todo-${todo.getUID()}-check" type="checkbox" name="todo-check" data-uid=${todo.getUID()}/>
+              ${todo.getTitle()}
+            </label>
+          </div>
+        `
+        )
+        .join("");
+      content = `
+        <div class="project">
+          <div class="project-title-wrapper">
+            <h2 class="project-title">${renderingProject.title}</h2>
+            <button class="project-detail" data-title=${renderingProject.title}>
+              <img src=${detailIcon} aria-label="more"/>
+            </button>
+            <div class="project-dropdown hidden" data-title=${renderingProject.title}>
+              <button class="delete-project" data-title=${renderingProject.title}>Delete Project</button>
+            </div>
+          </div>
+          <hr/>
+          <div class="todo-container">
+            ${projectTodos}
+          </div>
+        </div>
+      `;
+    }
+    mainContent.innerHTML = content;
+    addProjectDetailsEventListeners();
+    addTaskDetailsEventListeners();
+  };
+
+  const renderSidebarProjects = () => {
     const projectFilterContainer = document.querySelector(
       "#project-filter-container"
     );
@@ -159,7 +225,7 @@ const displayController = (function () {
     const projectFilters = projects
       .map(
         (project) => `
-        <button data-title="${project.title}">
+        <button class="project-filter" data-title="${project.title}">
             <span class="filter-content"
               ><img src=${projectIcon} alt="" />${project.title}</span
             >
@@ -176,6 +242,7 @@ const displayController = (function () {
 
     projectFilterContainer.innerHTML = projectFilters;
     ProjectNameSelect.innerHTML = projectOptions;
+    addProjectFilterEventListeners();
   };
 
   const addNewProjectEventListeners = () => {
@@ -192,7 +259,7 @@ const displayController = (function () {
       const projectTitle = document.querySelector("#project-title").value;
 
       projectController.createProject(projectTitle);
-      renderProjects();
+      renderSidebarProjects();
       renderTodos();
       newProjectForm.reset();
       newProjectModal.close();
@@ -247,7 +314,7 @@ const displayController = (function () {
           deletionConfirmDialog.innerHTML = "";
           deletionConfirmDialog.close();
           renderTodos();
-          renderProjects();
+          renderSidebarProjects();
         });
 
         deletionConfirmDialog.showModal();
@@ -387,9 +454,20 @@ const displayController = (function () {
     anytimeFilter.addEventListener("click", () => renderTodos());
   };
 
+  const addProjectFilterEventListeners = () => {
+    const projectFilters = document.querySelectorAll(".project-filter");
+
+    projectFilters.forEach((projectFilter) => {
+      projectFilter.addEventListener("click", () => {
+        const title = projectFilter.dataset.title;
+        renderProject(title);
+      });
+    });
+  };
+
   return {
     renderTodos,
-    renderProjects,
+    renderSidebarProjects,
     addNewProjectEventListeners,
     addNewTaskEventListeners,
     addFilterEventListeners,

@@ -28,7 +28,7 @@ todoController.createTodo(
 
 console.log(todoController.getTodos());
 displayController.renderTodos();
-displayController.renderProjects();
+displayController.renderSidebarProjects();
 displayController.addNewProjectEventListeners();
 displayController.addNewTaskEventListeners();
 displayController.addFilterEventListeners();
