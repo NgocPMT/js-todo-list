@@ -133,12 +133,13 @@ const displayController = (function () {
     detailButtons.forEach((button) => {
       button.addEventListener("click", () => {
         projectDropdowns.forEach((dropdown) => {
-          if (dropdown.dataset.title === button.dataset.title) {
-            if (dropdown.classList.contains("hidden")) {
-              dropdown.classList.remove("hidden");
-            } else {
-              dropdown.classList.add("hidden");
-            }
+          if (
+            dropdown.classList.contains("hidden") &&
+            dropdown.dataset.title === button.dataset.title
+          ) {
+            dropdown.classList.remove("hidden");
+          } else {
+            dropdown.classList.add("hidden");
           }
         });
       });
