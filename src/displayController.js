@@ -135,10 +135,26 @@ const displayController = (function () {
     });
   };
 
+  const addNewTaskEventListeners = () => {
+    const newTaskModal = document.querySelector("#new-task-modal");
+    const newTaskBtn = document.querySelector("#new-todo-btn");
+    const newTaskClose = document.querySelector("#new-task-close");
+    const newTaskForm = document.querySelector("#new-task-form");
+
+    newTaskBtn.addEventListener("click", () => {
+      newTaskModal.showModal();
+    });
+
+    newTaskClose.addEventListener("click", () => {
+      newTaskModal.close();
+    });
+  };
+
   return {
     renderTodos,
     renderProjects,
     addNewProjectEventListeners,
+    addNewTaskEventListeners,
   };
 })();
 

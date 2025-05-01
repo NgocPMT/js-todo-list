@@ -60,6 +60,52 @@
           </div>
         </form>
       </dialog>
+
+      <dialog id="new-task-modal" tabindex="-1">
+        <form id="new-task-form">
+          <div class="form-field">
+            <label for="task-title">Task Title</label>
+            <input
+              id="task-title"
+              type="text"
+              name="task-title"
+              required
+              minlength="2"
+              maxlength="20"
+            />
+          </div>
+          <div class="form-field">
+            <label for="task-due-date">Due Date</label>
+            <input
+              id="task-due-date"
+              type="date"
+              name="task-due-date"
+              required
+              minlength="2"
+              maxlength="20"
+            />
+          </div>
+          <div class="form-field">
+            <label for="task-priority">Priority</label>
+            <input
+              id="task-priority"
+              type="number"
+              name="task-priority"
+              required
+              minlength="2"
+              maxlength="20"
+            />
+          </div>
+          <div class="form-field">
+            <label for="task-project-name">Project</label>
+            <select id="task-project-name"></select>
+          </div>
+          <div class="new-task-buttons">
+            <button id="new-task-close" type="button">Close</button>
+            <button id="new-task-submit" type="submit">Submit</button>
+          </div>
+        </form>
+      </dialog>
     </div>
   </body>
 </html>

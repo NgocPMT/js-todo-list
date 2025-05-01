@@ -30,3 +30,4 @@ console.log(todoController.getTodos());
 displayController.renderTodos();
 displayController.renderProjects();
 displayController.addNewProjectEventListeners();
+displayController.addNewTaskEventListeners();
