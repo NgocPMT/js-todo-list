@@ -23,7 +23,7 @@ const todoController = (function () {
       dueDate: todo.getDueDate(),
       priority: todo.getPriority(),
       projectName: todo.getProjectName(),
-      check: todo.getChecked(),
+      checked: todo.getChecked(),
     }));
 
     localStorage.setItem("todos", JSON.stringify(localTodos));
@@ -80,7 +80,24 @@ const todoController = (function () {
     return upcomingTodos;
   };
 
-  return { createTodo, getTodos, deleteTodo, getTodayTodos, getUpcomingTodos };
+  const switchCheck = (UID) => {
+    const checkedTodo = todos.find((todo) => todo.getUID() === UID);
+
+    if (checkedTodo) {
+      checkedTodo.setChecked(!checkedTodo.getChecked());
+    }
+
+    saveLocalTodos();
+  };
+
+  return {
+    createTodo,
+    getTodos,
+    deleteTodo,
+    getTodayTodos,
+    getUpcomingTodos,
+    switchCheck,
+  };
 })();
 
 export default todoController;

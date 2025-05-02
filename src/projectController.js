@@ -27,7 +27,7 @@ const projectController = (function () {
         dueDate: todo.getDueDate(),
         priority: todo.getPriority(),
         projectName: todo.getProjectName(),
-        check: todo.getChecked(),
+        checked: todo.getChecked(),
       }));
       return { title: project.title, todos: localProjectTodos };
     });
@@ -75,7 +75,28 @@ const projectController = (function () {
     saveLocalProjects();
   };
 
-  return { getProjects, createProject, pushTodo, deleteProject, deleteTodo };
+  const switchCheck = (UID) => {
+    let checkedTodo = null;
+    projects.forEach(
+      (project) =>
+        (checkedTodo = project.todos.find((todo) => todo.getUID() === UID))
+    );
+
+    if (checkedTodo) {
+      checkedTodo.setChecked(!checkedTodo.getChecked());
+    }
+
+    saveLocalProjects();
+  };
+
+  return {
+    getProjects,
+    createProject,
+    pushTodo,
+    deleteProject,
+    deleteTodo,
+    switchCheck,
+  };
 })();
 
 export default projectController;

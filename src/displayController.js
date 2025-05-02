@@ -40,7 +40,7 @@ const displayController = (function () {
               <button class="todo-delete" data-uid=${todo.getUID()}>Delete Task</button>
             </div>
             <label for="todo-${todo.getUID()}-check" class="todo-title">
-              <input id="todo-${todo.getUID()}-check" type="checkbox" name="todo-check" data-uid=${todo.getUID()}/>
+              <input id="todo-${todo.getUID()}-check" type="checkbox" name="todo-check" data-uid=${todo.getUID()} data-checked="${todo.getChecked()}"/>
               ${todo.getTitle()}
             </label>
           </div>
@@ -68,6 +68,7 @@ const displayController = (function () {
       .join("");
 
     mainContent.innerHTML = content;
+    addCheckedAttributes();
     addProjectDetailsEventListeners();
     addTaskDetailsEventListeners();
   };
@@ -88,7 +89,7 @@ const displayController = (function () {
               <button class="todo-delete" data-uid=${todo.getUID()}>Delete Task</button>
             </div>
             <label for="todo-${todo.getUID()}-check" class="todo-title">
-              <input id="todo-${todo.getUID()}-check" type="checkbox" name="todo-check" data-uid=${todo.getUID()}/>
+              <input id="todo-${todo.getUID()}-check" type="checkbox" name="todo-check" data-uid=${todo.getUID()} data-checked="${todo.getChecked()}"/>
               ${todo.getTitle()}
             </label>
           </div>
@@ -109,6 +110,7 @@ const displayController = (function () {
       </div>
     `;
 
+    addCheckedAttributes();
     addTaskDetailsEventListeners();
   };
 
@@ -128,7 +130,7 @@ const displayController = (function () {
               <button class="todo-delete" data-uid=${todo.getUID()}>Delete Task</button>
             </div>
             <label for="todo-${todo.getUID()}-check" class="todo-title">
-              <input id="todo-${todo.getUID()}-check" type="checkbox" name="todo-check" data-uid=${todo.getUID()}/>
+              <input id="todo-${todo.getUID()}-check" type="checkbox" name="todo-check" data-uid=${todo.getUID()} data-check=${todo.getChecked()}/>
               ${todo.getTitle()}
             </label>
           </div>
@@ -149,6 +151,7 @@ const displayController = (function () {
       </div>
     `;
 
+    addCheckedAttributes();
     addTaskDetailsEventListeners();
   };
 
@@ -188,7 +191,7 @@ const displayController = (function () {
               <button class="todo-delete" data-uid=${todo.getUID()}>Delete Task</button>
             </div>
             <label for="todo-${todo.getUID()}-check" class="todo-title">
-              <input id="todo-${todo.getUID()}-check" type="checkbox" name="todo-check" data-uid=${todo.getUID()}/>
+              <input id="todo-${todo.getUID()}-check" type="checkbox" name="todo-check" data-uid=${todo.getUID()} data-checked="${todo.getChecked()}"/>
               ${todo.getTitle()}
             </label>
           </div>
@@ -213,7 +216,9 @@ const displayController = (function () {
         </div>
       `;
     }
+
     mainContent.innerHTML = content;
+    addCheckedAttributes();
     addProjectDetailsEventListeners();
     addTaskDetailsEventListeners();
   };
@@ -269,6 +274,19 @@ const displayController = (function () {
       renderTodos();
       newProjectForm.reset();
       newProjectModal.close();
+    });
+  };
+
+  const addCheckedAttributes = () => {
+    const checkboxes = document.querySelectorAll(
+      'input[id^="todo-"][id$="-check"]'
+    );
+
+    checkboxes.forEach((checkbox) => {
+      const checked = checkbox.dataset.checked;
+      if (checked === "true") {
+        checkbox.checked = true;
+      }
     });
   };
 
@@ -371,6 +389,18 @@ const displayController = (function () {
     const taskDropdowns = document.querySelectorAll(".todo-dropdown");
     const infoButtons = document.querySelectorAll(".todo-info");
     const deleteButtons = document.querySelectorAll(".todo-delete");
+    const checkboxes = document.querySelectorAll(
+      'input[id^="todo-"][id$="-check"]'
+    );
+
+    checkboxes.forEach((button) => {
+      button.addEventListener("click", () => {
+        const UID = button.dataset.uid;
+
+        todoController.switchCheck(UID);
+        projectController.switchCheck(UID);
+      });
+    });
 
     detailButtons.forEach((button) => {
       button.addEventListener("click", () => {
