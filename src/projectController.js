@@ -1,10 +1,43 @@
 import generateProject from "./project";
+import generateTodo from "./todo";
 
 const projectController = (function () {
-  const projects = [generateProject("general")];
+  const getLocalProjects = () => {
+    if (!localStorage.getItem("projects")) {
+      return;
+    }
+
+    const localProjects = JSON.parse(localStorage.getItem("projects"));
+
+    const newProjects = localProjects.map((project) => {
+      const localProjectTodos = project.todos.map((todo) => generateTodo(todo));
+      return { title: project.title, todos: localProjectTodos };
+    });
+
+    return newProjects;
+  };
+
+  const projects = getLocalProjects() || [generateProject("general")];
+
+  const saveLocalProjects = () => {
+    const localProjects = projects.map((project) => {
+      const localProjectTodos = project.todos.map((todo) => ({
+        UID: todo.getUID(),
+        title: todo.getTitle(),
+        dueDate: todo.getDueDate(),
+        priority: todo.getPriority(),
+        projectName: todo.getProjectName(),
+        check: todo.getChecked(),
+      }));
+      return { title: project.title, todos: localProjectTodos };
+    });
+
+    localStorage.setItem("projects", JSON.stringify(localProjects));
+  };
 
   const createProject = (title) => {
     projects.push(generateProject(title));
+    saveLocalProjects();
   };
 
   const getProjects = () => projects;
@@ -19,6 +52,7 @@ const projectController = (function () {
     }
 
     addingProject.todos.sort((t1, t2) => t1.getPriority() - t2.getPriority());
+    saveLocalProjects();
   };
 
   const deleteProject = (title) => {
@@ -27,6 +61,7 @@ const projectController = (function () {
     if (deletingProject) {
       projects.splice(projects.indexOf(deletingProject), 1);
     }
+    saveLocalProjects();
   };
 
   const deleteTodo = (UID) => {
@@ -37,6 +72,7 @@ const projectController = (function () {
         return;
       }
     });
+    saveLocalProjects();
   };
 
   return { getProjects, createProject, pushTodo, deleteProject, deleteTodo };
