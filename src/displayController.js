@@ -75,9 +75,12 @@ const displayController = (function () {
   const renderTodayTodos = () => {
     const todos = todoController.getTodayTodos();
 
-    const todayTodos = todos
-      .map(
-        (todo) => `
+    const todayTodos =
+      todos.length === 0
+        ? `<p class="no-task-announce">There are no tasks yet...</p>`
+        : todos
+            .map(
+              (todo) => `
           <div class="todo">
             <button class="todo-details" data-uid=${todo.getUID()}><img src=${detailIconVert} aria-label="more"/></button>
             <div class="todo-dropdown hidden" data-uid=${todo.getUID()}>
@@ -90,8 +93,8 @@ const displayController = (function () {
             </label>
           </div>
         `
-      )
-      .join("");
+            )
+            .join("");
     const mainContent = document.querySelector("#main-content");
 
     mainContent.innerHTML = `
@@ -112,9 +115,12 @@ const displayController = (function () {
   const renderUpcomingTodos = () => {
     const todos = todoController.getUpcomingTodos();
 
-    const upcomingTodos = todos
-      .map(
-        (todo) => `
+    const upcomingTodos =
+      todos.length === 0
+        ? `<p class="no-task-announce">There are no tasks yet...</p>`
+        : todos
+            .map(
+              (todo) => `
           <div class="todo">
             <button class="todo-details" data-uid=${todo.getUID()}><img src=${detailIconVert} aria-label="more"/></button>
             <div class="todo-dropdown hidden" data-uid=${todo.getUID()}>
@@ -127,8 +133,8 @@ const displayController = (function () {
             </label>
           </div>
         `
-      )
-      .join("");
+            )
+            .join("");
     const mainContent = document.querySelector("#main-content");
 
     mainContent.innerHTML = `
